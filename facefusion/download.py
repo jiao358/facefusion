@@ -56,7 +56,7 @@ def is_download_done(url : str, file_path : str) -> bool:
 
 def conditional_download_hashes(download_directory_path : str, hashes : DownloadSet) -> bool:
 	hash_paths = [ hashes.get(hash_key).get('path') for hash_key in hashes.keys() ]
-
+	print("hash_paths: " + str(hash_paths))
 	process_manager.check()
 	if not state_manager.get_item('skip_download'):
 		_, invalid_hash_paths = validate_hash_paths(hash_paths)
@@ -72,6 +72,7 @@ def conditional_download_hashes(download_directory_path : str, hashes : Download
 		logger.debug(wording.get('validating_hash_succeed').format(hash_file_name = valid_hash_file_name), __name__)
 	for invalid_hash_path in invalid_hash_paths:
 		invalid_hash_file_name, _ = os.path.splitext(os.path.basename(invalid_hash_path))
+		print("invalid_hash_path: ", invalid_hash_path)
 		logger.error(wording.get('validating_hash_failed').format(hash_file_name = invalid_hash_file_name), __name__)
 
 	if not invalid_hash_paths:

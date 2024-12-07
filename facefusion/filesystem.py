@@ -80,6 +80,7 @@ def filter_image_paths(paths : List[str]) -> List[str]:
 
 
 def resolve_relative_path(path : str) -> str:
+	print("nsfw_path: " + os.path.abspath(os.path.join(os.path.dirname(__file__), path)))
 	return os.path.abspath(os.path.join(os.path.dirname(__file__), path))
 
 
